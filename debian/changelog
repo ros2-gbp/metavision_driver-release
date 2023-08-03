@@ -1,0 +1,17 @@
+ros-humble-metavision-driver (1.0.1-2bullseye) bullseye; urgency=high
+
+  * Change package name from metavision_ros_driver to metavision_driver, and
+    all references to event_array_msgs to event_camera_msgs
+  * Download and compile OpenEB if not already installed
+  * Contributors: Bernd Pfrommer
+
+ -- Bernd Pfrommer <bernd.pfrommer@gmail.com>  Mon, 24 Jul 2023 04:00:00 -0000
+
+ros-humble-metavision-driver (1.0.0-2bullseye) bullseye; urgency=high
+
+  * initial commit
+  * Contributors: Bernd Pfrommer, k-chaney
+
+ -- Bernd Pfrommer <bernd.pfrommer@gmail.com>  Thu, 29 Jun 2023 04:00:00 -0000
+
+
