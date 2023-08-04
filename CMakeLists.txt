@@ -18,14 +18,11 @@ project(metavision_driver)
 
 include(FetchContent)
 
-
 find_package(MetavisionSDK COMPONENTS driver QUIET)
 
 # if metavision sdk is not present, download it into the build directory
 set(MUST_INSTALL_METAVISION FALSE)
 
-set(BUILD_TESTING_OLD ${BUILD_TESTING})
-set(BUILD_TESTING OFF CACHE INTERNAL "Build tests")
 if(NOT MetavisionSDK_FOUND)
   # must set various variables for OpenEB *before* fetching openEB.
   # CMAKE_ARGS seems to not work for FetchContent_Declare()
@@ -39,7 +36,7 @@ if(NOT MetavisionSDK_FOUND)
   FetchContent_Declare(
     metavision
     GIT_REPOSITORY https://github.com/ros-event-camera/openeb.git
-    GIT_TAG   4.2.0-cmake_current_source_dir)
+    GIT_TAG   4.2.0-ros)
 
   FetchContent_MakeAvailable(metavision)
 
@@ -51,13 +48,11 @@ if(NOT MetavisionSDK_FOUND)
   set(MUST_INSTALL_METAVISION TRUE)
 endif()
 
-set(BUILD_TESTING ON CACHE BOOL INTERNAL "Build tests")
-
+#
+# figure out ROS1 vs ROS2
+#
 if(DEFINED ENV{ROS_VERSION})
   if($ENV{ROS_VERSION} EQUAL "2")
-    # to avoid cmake warning: "Manually-specified variables were not used by the project"
-    unset(CATKIN_INSTALL_INTO_PREFIX_ROOT)
-    unset(CATKIN_SYMLINK_INSTALL)
     include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ROS2.cmake)
   elseif($ENV{ROS_VERSION} EQUAL "1")
     include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ROS1.cmake)
