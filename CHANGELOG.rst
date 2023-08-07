@@ -2,7 +2,7 @@
 Changelog for package metavision_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.0.4 (2023-08-07)
+1.0.5 (2023-08-07)
 ------------------
 * added dependency on hal_plugins to cause metavision plugins to be built
 * remove setting of unnecessary COMPILE_3DVIEW option
