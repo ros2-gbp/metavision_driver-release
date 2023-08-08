@@ -2,22 +2,12 @@
 Changelog for package metavision_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.1.7 (2023-08-08)
+1.0.6 (2023-08-08)
 ------------------
-* Prophesee standard plugins should now be coming with the ROS driver
+* Package should now contain Prophesee default plugins
 * Contributors: Bernd Pfrommer
 
-1.1.6 (2023-08-07)
-------------------
-* see if add_dependencies() is causing trouble
-* resurrected old ROS_VERSION detection scheme
-* Contributors: Bernd Pfrommer
-
-1.1.5 (2023-08-07)
-------------------
-* bump minor package number to avoid collisions with rolling
-
-1.0.4 (2023-08-07)
+1.0.5 (2023-08-07)
 ------------------
 * added dependency on hal_plugins to cause metavision plugins to be built
 * remove setting of unnecessary COMPILE_3DVIEW option
