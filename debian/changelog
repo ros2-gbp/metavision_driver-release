@@ -1,0 +1,47 @@
+ros-rolling-metavision-driver (1.0.6-1jammy) jammy; urgency=high
+
+  * Package should now contain Prophesee default plugins
+  * Contributors: Bernd Pfrommer
+
+ -- Bernd Pfrommer <bernd.pfrommer@gmail.com>  Tue, 08 Aug 2023 04:00:00 -0000
+
+ros-rolling-metavision-driver (1.0.5-1jammy) jammy; urgency=high
+
+  * added dependency on hal_plugins to cause metavision plugins to be built
+  * remove setting of unnecessary COMPILE_3DVIEW option
+  * Contributors: Bernd Pfrommer
+
+ -- Bernd Pfrommer <bernd.pfrommer@gmail.com>  Mon, 07 Aug 2023 04:00:00 -0000
+
+ros-rolling-metavision-driver (1.0.3-1jammy) jammy; urgency=high
+
+  * changes to build on ROS2 build farm
+  * Contributors: Bernd Pfrommer
+
+ -- Bernd Pfrommer <bernd.pfrommer@gmail.com>  Fri, 04 Aug 2023 04:00:00 -0000
+
+ros-rolling-metavision-driver (1.0.2-1jammy) jammy; urgency=high
+
+  * Try to pull in OpenEB dependencies via package.xml and figure out ROS1/ROS2 via cmake
+  * updated links in README
+  * Contributors: Bernd Pfrommer, Laurent Bristiel
+
+ -- Bernd Pfrommer <bernd.pfrommer@gmail.com>  Thu, 03 Aug 2023 04:00:00 -0000
+
+ros-rolling-metavision-driver (1.0.1-1jammy) jammy; urgency=high
+
+  * Change package name from metavision_ros_driver to metavision_driver, and
+    all references to event_array_msgs to event_camera_msgs
+  * Download and compile OpenEB if not already installed
+  * Contributors: Bernd Pfrommer
+
+ -- Bernd Pfrommer <bernd.pfrommer@gmail.com>  Mon, 24 Jul 2023 04:00:00 -0000
+
+ros-rolling-metavision-driver (1.0.0-1jammy) jammy; urgency=high
+
+  * initial commit
+  * Contributors: Bernd Pfrommer, k-chaney
+
+ -- Bernd Pfrommer <bernd.pfrommer@gmail.com>  Thu, 29 Jun 2023 04:00:00 -0000
+
+
