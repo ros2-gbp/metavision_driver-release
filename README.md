@@ -1,3 +1,26 @@
+## metavision_driver (humble) - 1.1.7-1
+
+The packages in the `metavision_driver` repository were released into the `humble` distro by running `/usr/bin/bloom-release --rosdistro humble metavision_driver` on `Tue, 08 Aug 2023 18:25:59 -0000`
+
+The `metavision_driver` package was released.
+
+Version of package(s) in repository `metavision_driver`:
+
+- upstream repository: https://github.com/ros-event-camera/metavision_driver.git
+- release repository: https://github.com/ros2-gbp/metavision_driver-release.git
+- rosdistro version: `1.1.6-2`
+- old version: `1.1.6-2`
+- new version: `1.1.7-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `0.5.2`
+- rosdep version: `0.22.2`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## metavision_driver (humble) - 1.1.6-2
 
 The packages in the `metavision_driver` repository were released into the `humble` distro by running `/usr/bin/bloom-release --rosdistro humble metavision_driver` on `Mon, 07 Aug 2023 23:55:46 -0000`
