@@ -1,3 +1,26 @@
+## metavision_driver (iron) - 1.2.8-1
+
+The packages in the `metavision_driver` repository were released into the `iron` distro by running `/usr/bin/bloom-release --new-track --rosdistro iron --track iron metavision_driver` on `Sun, 12 Nov 2023 22:33:12 -0000`
+
+The `metavision_driver` package was released.
+
+Version of package(s) in repository `metavision_driver`:
+
+- upstream repository: https://github.com/ros-event-camera/metavision_driver.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `1.2.8-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.22.2`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## metavision_driver (rolling) - 1.0.8-1
 
 The packages in the `metavision_driver` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling metavision_driver` on `Sun, 12 Nov 2023 22:27:39 -0000`
