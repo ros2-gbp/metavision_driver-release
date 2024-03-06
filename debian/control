@@ -1,0 +1,12 @@
+Source: ros-rolling-metavision-driver
+Section: misc
+Priority: optional
+Maintainer: Bernd Pfrommer <bernd.pfrommer@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), cmake, curl, ffmpeg, git, hdf5-tools, libavcodec-dev, libavformat-dev, libavutil-dev, libboost-all-dev, libcurl4-openssl-dev, libglew-dev, libglfw3-dev, libgtest-dev <!nocheck>, libhdf5-dev, libopencv-dev, libopenscenegraph-dev, libswscale-dev, libusb-1.0-0-dev, openscenegraph, ros-rolling-ament-cmake, ros-rolling-ament-cmake-auto, ros-rolling-ament-cmake-clang-format <!nocheck>, ros-rolling-ament-cmake-copyright <!nocheck>, ros-rolling-ament-cmake-cppcheck <!nocheck>, ros-rolling-ament-cmake-cpplint <!nocheck>, ros-rolling-ament-cmake-flake8 <!nocheck>, ros-rolling-ament-cmake-lint-cmake <!nocheck>, ros-rolling-ament-cmake-pep257 <!nocheck>, ros-rolling-ament-cmake-ros, ros-rolling-ament-cmake-xmllint <!nocheck>, ros-rolling-event-camera-msgs, ros-rolling-rclcpp, ros-rolling-rclcpp-components, ros-rolling-ros-environment, ros-rolling-std-srvs, unzip, wget, ros-rolling-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-rolling-metavision-driver
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libboost-all-dev, libglew-dev, libglfw3-dev, libhdf5-dev, libopencv-dev, libopenscenegraph-dev, libswscale-dev, libusb-1.0-0-dev, openscenegraph, ros-rolling-event-camera-msgs, ros-rolling-rclcpp, ros-rolling-rclcpp-components, ros-rolling-std-srvs, ros-rolling-ros-workspace
+Description: ROS1 and ROS2 drivers for metavision based event cameras
