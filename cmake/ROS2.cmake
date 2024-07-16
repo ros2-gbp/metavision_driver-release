@@ -28,10 +28,7 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE RelWithDebInfo)
 endif()
 
-# find dependencies
-
-# MetavisionSDK is now found otherwise
-# find_package(MetavisionSDK COMPONENTS driver REQUIRED)
+find_package(MetavisionSDK COMPONENTS driver REQUIRED)
 
 if(MetavisionSDK_VERSION_MAJOR LESS 4)
   add_definitions(-DUSING_METAVISION_3)
@@ -97,11 +94,6 @@ install(DIRECTORY
   config
   DESTINATION share/${PROJECT_NAME}/)
 
-if(MUST_INSTALL_METAVISION)
-  install(DIRECTORY  "${CMAKE_CURRENT_BINARY_DIR}/_deps/metavision-build/lib"
-    DESTINATION ${CMAKE_INSTALL_PREFIX})
-endif()
-
 if(BUILD_TESTING)
   find_package(ament_cmake REQUIRED)
   find_package(ament_cmake_copyright REQUIRED)
@@ -109,19 +101,19 @@ if(BUILD_TESTING)
   find_package(ament_cmake_cpplint REQUIRED)
   find_package(ament_cmake_flake8 REQUIRED)
   find_package(ament_cmake_lint_cmake REQUIRED)
-  find_package(ament_cmake_clang_format REQUIRED)
-  find_package(ament_cmake_pep257 REQUIRED)
+  # find_package(ament_cmake_pep257 REQUIRED) # (does not work on galactic/foxy)
   find_package(ament_cmake_xmllint REQUIRED)
+  find_package(ament_cmake_clang_format REQUIRED)
 
   ament_copyright()
   ament_cppcheck(LANGUAGE c++)
   ament_cpplint(FILTERS "-build/include,-runtime/indentation_namespace")
-  ament_flake8()
-  #ament_lint_cmake(--filter=-readability/wonkycase)
+  ament_flake8(--config ${CMAKE_CURRENT_SOURCE_DIR}/.flake8.ini)
+  # ament_lint_cmake(--filter=-readability/wonkycase)
   ament_lint_cmake()
-  ament_pep257()
-  ament_clang_format(CONFIG_FILE .clang-format)
+  # ament_pep257() # (does not work on galactic/foxy)
   ament_xmllint()
+  ament_clang_format(CONFIG_FILE .clang-format)
 endif()
 
 ament_package()

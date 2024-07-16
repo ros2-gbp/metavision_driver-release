@@ -21,7 +21,7 @@ The events can be decoded and displayed using the following ROS/ROS2 packages:
   has C++ routines to decode event_camera_msgs.
 - [event_camera_py](https://github.com/ros-event-camera/event_camera_py)
   module for fast event decoding in python.
-- [event_camera_viewer](https://github.com/ros-event-camera/event_camera_viewer)
+- [event_camera_renderer](https://github.com/ros-event-camera/event_camera_renderer)
   a node / nodelet that renders and publishes ROS image messages.
 - [event_camera_tools](https://github.com/ros-event-camera/event_camera_tools)
   a set of tools to echo, monitor performance and convert
@@ -32,15 +32,19 @@ The events can be decoded and displayed using the following ROS/ROS2 packages:
 Tested on the following platforms:
 
 - ROS Noetic
-- ROS2 Galactic / Humble
+- ROS2 Humble (also compiles on other versions, see CI)
 - Ubuntu 20.04, 22.04 LTS
-- Metavision SDK (OpenEB) 2.2.2 - 4.0.1
+- Metavision SDK (OpenEB) 4.2.0
+
 
 Tested on the following hardware:
 
 - [SilkyEVCam VGA (Gen 3.1 sensor)](https://centuryarks.com/en/silkyevcam-vga/)
 - [SilkyEVCam HD (Gen 4 sensor)](https://centuryarks.com/en/silkyevcam-hd/)
 - [Prophesee EVK4 (Gen 4 sensor)](https://www.prophesee.ai/event-camera-evk4/)
+
+Explicitly not supported: any data in the old EVT2 format. The sensor
+must produce data in the EVT3 format or later.
 
 ## How to build
 
@@ -114,12 +118,15 @@ Parameters:
 - ``bias_file``: path to file with camera biases. See example in the
   ``biases`` directory.
 - ``from_file``: path to Metavision raw file. Instead of opening
-  camera, driver plays back data from this file.
+  camera, driver plays back data from this file. This will not be in
+  real time, usually faster.
 - ``serial``: specifies serial number of camera to open (useful for
   stereo). To learn serial number format first start driver without
   specifying serial number and look at the log files.
 - ``event_message_time_threshold``: (in seconds) minimum time span of
   events to be aggregated in one ROS event message before message is sent. Defaults to 1ms.
+  In its default setting however the SDK provides packets only every 4ms. To increase SDK
+  callback frequency, tune ``mipi_frame_period`` if available for your sensor.
 - ``event_message_size_threshold``: (in bytes) minimum size of events
   (in bytes) to be aggregated in one ROS event message before message is sent. Defaults to 1MB.
 - ``statistics_print_interval``: time in seconds between statistics printouts.
@@ -138,10 +145,12 @@ Parameters:
   ``[top_left_x_1, top_left_y_1, width_1, height_1, top_left_x_2, top_left_y_2, width_2...]``.
   The length of the ``roi`` parameter vector must therefore be a multiple
   of 4. Beware that when using multiple ROIs, per Metavision SDK  documentation:
-  ["Any line or column enabled by a single ROI is also enabled for all the other"](https://docs.prophesee.ai/stable/metavision_sdk/modules/driver/api/features.html#_CPPv4N10Metavision3RoiE).
+  ["Any line or column enabled by a single ROI is also enabled for all the other"](https://docs.prophesee.ai/stable/api/cpp/driver/features.html#_CPPv4N10Metavision3RoiE).
 - ``erc_mode``: event rate control mode (Gen4 sensor): ``na``,
   ``disabled``, ``enabled``. Default: ``na``.
 - ``erc_rate``: event rate control rate (Gen4 sensor) events/sec. Default: 100000000.
+- ``mipi_frame_period``:: mipi frame period in usec. Only available on some sensors.
+    Tune this to get faster callback rates from the SDK to the ROS driver. For instance 1008 will give a callback every millisecond. Risk of data corruption when set too low! Default: -1 (not set).
 - ``sync_mode``: Used to synchronize the time stamps across multiple
   cameras (tested for only 2). The cameras must be connected via a
   sync cable, and two separate ROS driver nodes are started, see
@@ -213,12 +222,12 @@ rosrun metavision_driver start_recording.py
 rosrun metavision_driver stop_recording.py
 ```
 
-To visualize the events, run a ``viewer`` node from the
-[event_camera_viewer](https://github.com/ros-event-camera/event_camera_viewer) package:
+To visualize the events, run a ``renderer`` node from the
+[event_camera_renderer](https://github.com/ros-event-camera/event_camera_renderer) package:
 ```
-roslaunch event_camera_viewer viewer.launch
+roslaunch event_camera_renderer renderer.launch
 ```
-The viewer node publishes an image that can be visualized with e.g. ``rqt_image_view``
+The renderer node publishes an image that can be visualized with e.g. ``rqt_image_view``
 
 
 # How to use (ROS2):
@@ -242,12 +251,12 @@ ros2 run rosbag2_composable_recorder start_recording.py
 ```
 To stop the recording you have to kill (Ctrl-C) the recording driver.
 
-To visualize the events, run a ``viewer`` node from the
-[event_camera_viewer](https://github.com/ros-event-camera/event_camera_viewer) package:
+To visualize the events, run a ``renderer`` node from the
+[event_camera_renderer](https://github.com/ros-event-camera/event_camera_renderer) package:
 ```
-ros2 launch event_camera_viewer viewer.launch.py
+ros2 launch event_camera_renderer renderer.launch.py
 ```
-The viewer node publishes an image that can be visualized with e.g. ``rqt_image_view``
+The renderer node publishes an image that can be visualized with e.g. ``rqt_image_view``
 
 ## CPU load
 
@@ -298,9 +307,9 @@ trigger events that can be recovered with the decoder.
 
 Prophesee provides documentation on the trigger functions at a high
 level
-[here](https://docs.prophesee.ai/stable/hw/manuals/triggers.html#chapter-concepts-triggers).
+[here](https://docs.prophesee.ai/stable/hw/manuals/timing_interfaces.html).
 
-[Trigger out](https://docs.prophesee.ai/stable/hw/manuals/triggers.html#trigger-out-principle)
+[Trigger out](https://docs.prophesee.ai/stable/hw/manuals/timing_interfaces.html#trigger-out)
 functionality is exposed through ``trigger_out_mode``,
 ``trigger_out_period``, and ``trigger_out_duty_cycle``. These
 variables follow the same meaning as laid out in the internal
@@ -311,7 +320,7 @@ documentation.
 - ``trigger_out_duty_cycle`` is the pulse width ratio
   (``trigger_out_period * trigger_out_duty_cycle`` must be at least 1us)
 
-[Trigger in](https://docs.prophesee.ai/stable/hw/manuals/triggers.html#trigger-in-principle)
+[Trigger in](https://docs.prophesee.ai/stable/hw/manuals/timing_interfaces.html#trigger-in)
 functionality is abstracted away from pins to just ``loopback`` or
 ``external`` as the pin mappings are constant for a given camera
 configuration. 
@@ -329,12 +338,12 @@ hardware (as most share trigger out and sync out pins).
 The hardware configuration file is ``config/trigger_pins.yaml``. The
 mappings for ``hal_plugin_gen*`` come from
 [Prophesee
-documentation](https://docs.prophesee.ai/stable/metavision_sdk/modules/metavision_hal/samples/hal_viewer.html#accessing-triggers).
+documentation](https://docs.prophesee.ai/3.1.2/metavision_sdk/modules/hal/samples/hal_viewer.html#configuring-trigger-in-and-trigger-out).
 The mapping for ``evc3a_plugin_gen31`` has been validated on the
 SilkyEvCam (March 2022). The mapping goes from the HAL Software Info
 to pin numbers. 
 
-If you camera is not yet supported, the software info is printed out
+If your camera is not yet supported, the software info is printed out
 on driver startup. Look for a line that contains: 
 
 ```
