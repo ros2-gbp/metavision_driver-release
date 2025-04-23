@@ -1,1 +1,1 @@
-{"base": "6602c48", "parent": "debian/rolling/metavision_driver", "previous": "3ce6f67", "trim": "", "trimbase": ""}
+{"base": "d2276eab364d", "parent": "debian/kilted/metavision_driver", "previous": "06266d21c4b5", "trim": "", "trimbase": ""}
