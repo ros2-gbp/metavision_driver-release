@@ -1,0 +1,12 @@
+Source: ros-rolling-metavision-driver
+Section: misc
+Priority: optional
+Maintainer: Bernd Pfrommer <bernd.pfrommer@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake, ros-rolling-ament-cmake-auto, ros-rolling-ament-cmake-clang-format <!nocheck>, ros-rolling-ament-cmake-copyright <!nocheck>, ros-rolling-ament-cmake-cppcheck <!nocheck>, ros-rolling-ament-cmake-cpplint <!nocheck>, ros-rolling-ament-cmake-flake8 <!nocheck>, ros-rolling-ament-cmake-lint-cmake <!nocheck>, ros-rolling-ament-cmake-ros, ros-rolling-ament-cmake-xmllint <!nocheck>, ros-rolling-event-camera-msgs, ros-rolling-openeb-vendor, ros-rolling-rclcpp, ros-rolling-rclcpp-components, ros-rolling-ros-environment, ros-rolling-std-srvs, ros-rolling-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-rolling-metavision-driver
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-rolling-event-camera-msgs, ros-rolling-openeb-vendor, ros-rolling-rclcpp, ros-rolling-rclcpp-components, ros-rolling-std-srvs, ros-rolling-ros-workspace
+Description: ROS1 and ROS2 drivers for metavision based event cameras
