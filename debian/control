@@ -1,0 +1,12 @@
+Source: ros-lyrical-metavision-driver
+Section: misc
+Priority: optional
+Maintainer: Bernd Pfrommer <bernd.pfrommer@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake, ros-lyrical-ament-cmake-auto, ros-lyrical-ament-cmake-clang-format <!nocheck>, ros-lyrical-ament-cmake-copyright <!nocheck>, ros-lyrical-ament-cmake-cppcheck <!nocheck>, ros-lyrical-ament-cmake-cpplint <!nocheck>, ros-lyrical-ament-cmake-flake8 <!nocheck>, ros-lyrical-ament-cmake-lint-cmake <!nocheck>, ros-lyrical-ament-cmake-ros, ros-lyrical-ament-cmake-xmllint <!nocheck>, ros-lyrical-event-camera-msgs, ros-lyrical-openeb-vendor, ros-lyrical-rclcpp, ros-lyrical-rclcpp-components, ros-lyrical-ros-environment, ros-lyrical-std-srvs, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/metavision_driver/#lyrical
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-metavision-driver
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-event-camera-msgs, ros-lyrical-openeb-vendor, ros-lyrical-rclcpp, ros-lyrical-rclcpp-components, ros-lyrical-std-srvs, ros-lyrical-ros-workspace
+Description: ROS1 and ROS2 drivers for metavision based event cameras
