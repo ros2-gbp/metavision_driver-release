@@ -1,3 +1,26 @@
+## metavision_driver (lyrical) - 3.0.2-1
+
+The packages in the `metavision_driver` repository were released into the `lyrical` distro by running `/usr/bin/bloom-release --ros-distro lyrical metavision_driver` on `Thu, 20 Aug 2026 15:16:01 -0000`
+
+The `metavision_driver` package was released.
+
+Version of package(s) in repository `metavision_driver`:
+
+- upstream repository: https://github.com/ros-event-camera/metavision_driver.git
+- release repository: https://github.com/ros2-gbp/metavision_driver-release.git
+- rosdistro version: `3.0.0-3`
+- old version: `3.0.0-3`
+- new version: `3.0.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.14.3`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## metavision_driver (kilted) - 3.0.2-1
 
 The packages in the `metavision_driver` repository were released into the `kilted` distro by running `/usr/bin/bloom-release --ros-distro kilted metavision_driver` on `Thu, 20 Aug 2026 15:11:18 -0000`
